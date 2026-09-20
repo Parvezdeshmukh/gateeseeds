@@ -15,13 +15,13 @@ const siteConfig = {
 
   contact: {
     // Printed on the carton as Customer Care
-    phonePrimary: '+919423931052',
-    phonePrimaryDisplay: '+91 94239 31052',
-    phoneSecondary: '+918380887058',
-    phoneSecondaryDisplay: '+91 83808 87058',
+    phonePrimary: '+919011420652',
+    phonePrimaryDisplay: '+919011420652',
+    phoneSecondary: '+919011420652',
+    phoneSecondaryDisplay: '+919011420652',
 
     // WhatsApp number in international format, digits only (country code + number)
-    whatsapp: '919423931052',
+    whatsapp: '+919011420652',
 
     // TODO: replace with the official GATEE SEEDS email address
     email: 'EMAIL_ADDRESS',
