@@ -1,0 +1,24 @@
+.final { background: var(--bg-light); }
+
+.final__inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--gold);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  padding: clamp(2.2rem, 6vw, 3.6rem) var(--gutter);
+  box-shadow: var(--shadow-sm);
+}
+
+.final h2 { max-width: 20ch; margin-bottom: 0.6rem; }
+
+.final p {
+  color: var(--ink-soft);
+  max-width: 52ch;
+  margin-bottom: 1.8rem;
+}
+
+.final__actions { justify-content: center; }

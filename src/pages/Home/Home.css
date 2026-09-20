@@ -1,0 +1,4 @@
+/* Page-level rhythm: the banner and CTA sit flush against their neighbours,
+   so the tinted sections around them keep their own padding. */
+.banner + .section { padding-top: var(--section-y); }
+.cta + .section { padding-top: var(--section-y); }

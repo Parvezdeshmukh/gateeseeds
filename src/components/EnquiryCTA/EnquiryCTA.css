@@ -1,0 +1,57 @@
+.cta {
+  position: relative;
+  overflow: hidden;
+  background: var(--green-dark);
+  color: #fff;
+}
+
+.cta__inner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(3rem, 7vw, 4.75rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.cta h2 {
+  color: #fff;
+  max-width: 17ch;
+  margin-bottom: 0.6rem;
+}
+
+.cta p {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* Golden wheat-ear arcs echoing the wreath in the GATEE logo */
+.cta__leaf {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 2px solid rgba(214, 162, 58, 0.28);
+  border-radius: 50% 50% 50% 0;
+  pointer-events: none;
+}
+
+.cta__leaf--left {
+  left: -110px;
+  top: -90px;
+  transform: rotate(18deg);
+}
+
+.cta__leaf--right {
+  right: -120px;
+  bottom: -120px;
+  transform: rotate(-160deg);
+  border-color: rgba(214, 162, 58, 0.2);
+}
+
+@media (max-width: 720px) {
+  .cta__actions { width: 100%; }
+  .cta__actions .btn { flex: 1 1 200px; }
+}
