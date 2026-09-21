@@ -15,16 +15,16 @@ const siteConfig = {
 
   contact: {
     // Printed on the carton as Customer Care
-    phonePrimary: '+919423931052',
-    phonePrimaryDisplay: '+91 94239 31052',
+    phonePrimary: '+918380887058',
+    phonePrimaryDisplay: '+91 83808 87058',
     phoneSecondary: '+918380887058',
     phoneSecondaryDisplay: '+91 83808 87058',
 
     // WhatsApp number in international format, digits only (country code + number)
-    whatsapp: '919423931052',
+    whatsapp: '+918380887058',
 
     // TODO: replace with the official GATEE SEEDS email address
-    email: 'EMAIL_ADDRESS',
+    email: 'gatee.seeds.pvt.ltd@gmail.com',
 
     addressLines: [
       'GATEE SEEDS PVT. LTD.',
@@ -41,9 +41,9 @@ const siteConfig = {
 
   // TODO: replace placeholders with the official profile links
   social: {
-    instagram: 'INSTAGRAM_URL',
+    instagram: 'https://www.instagram.com/gatee.seeds.pvt.ltd?stkn=dThoa3huZTI1ZDI=',
     facebook: 'FACEBOOK_URL',
-    youtube: 'YOUTUBE_URL'
+    youtube: 'https://www.youtube.com/@Gateeseedspvtltd'
   },
 
   messages: {
