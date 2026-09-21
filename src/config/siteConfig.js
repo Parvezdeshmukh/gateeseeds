@@ -21,7 +21,7 @@ const siteConfig = {
     phoneSecondaryDisplay: '+91 83808 87058',
 
     // WhatsApp number in international format, digits only (country code + number)
-    whatsapp: '919423931052',
+    whatsapp: '+918380887058',
 
     // TODO: replace with the official GATEE SEEDS email address
     email: 'gatee.seeds.pvt.ltd@gmail.com',
