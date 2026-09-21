@@ -15,8 +15,8 @@ const siteConfig = {
 
   contact: {
     // Printed on the carton as Customer Care
-    phonePrimary: '+919423931052',
-    phonePrimaryDisplay: '+91 94239 31052',
+    phonePrimary: '+918380887058',
+    phonePrimaryDisplay: '+91 83808 87058',
     phoneSecondary: '+918380887058',
     phoneSecondaryDisplay: '+91 83808 87058',
 
