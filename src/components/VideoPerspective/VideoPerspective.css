@@ -1,0 +1,413 @@
+/* =====================================================================
+   Box-sizing reset (scoped to this component only)
+   ===================================================================== */
+.video-section,
+.video-section *,
+.video-section *::before,
+.video-section *::after {
+  box-sizing: border-box;
+}
+
+/* =====================================================================
+   Base / Desktop styles (>= 1200px) — 3 cards, full spacing
+   ===================================================================== */
+.video-section {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 56px 0;
+  background: transparent;
+  text-align: center;
+}
+
+.video-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.video-heading {
+  color: #16a34a;
+  font-size: clamp(22px, 3.2vw, 36px);
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.video-underline {
+  display: inline-block;
+  width: 34px;
+  height: 3px;
+  background: #d4a017;
+  border-radius: 2px;
+  margin-bottom: 36px;
+}
+
+.video-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.video-track {
+  flex: 1;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.video-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.video-card {
+  flex: 0 0 calc((100% - 48px) / 3); /* 3 visible, 2 gaps of 24px */
+  scroll-snap-align: start;
+}
+
+.video-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* taller card */
+  background-color: #222;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.video-embed--facade {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  pointer-events: none; /* purely visual — the button below handles clicks */
+}
+
+.video-thumb-click {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.video-embed {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: none;
+  border-radius: 6px;
+  display: block;
+}
+
+.video-nav {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  margin: 0 14px;
+  border: none;
+  border-radius: 6px;
+  background: #15803d;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease,
+    opacity 0.25s ease;
+
+  /* Always visible on desktop, laptop and tablet.
+     Hidden-until-touch behavior is added back only inside the
+     phone (<= 600px) media query below. */
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-nav:hover {
+  background: #166534;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.4);
+}
+
+.video-nav:active {
+  transform: scale(0.95);
+}
+
+/* =====================================================================
+   Laptop (993px – 1200px) — same 3-card layout, tighter spacing
+   ===================================================================== */
+@media (max-width: 1200px) {
+  .video-shell {
+    padding: 0 48px;
+  }
+
+  .video-track {
+    gap: 20px;
+  }
+
+  .video-card {
+    flex: 0 0 calc((100% - 40px) / 3); /* 3 visible, 2 gaps of 20px */
+  }
+
+  .video-nav {
+    width: 38px;
+    height: 38px;
+    margin: 0 10px;
+    font-size: 16px;
+  }
+}
+
+/* =====================================================================
+   Tablet (768px – 992px) — 2 cards visible
+   ===================================================================== */
+@media (max-width: 992px) {
+  .video-section {
+    padding: 44px 0;
+  }
+
+  .video-shell {
+    padding: 0 32px;
+  }
+
+  .video-card {
+    flex: 0 0 calc((100% - 24px) / 2); /* 2 visible */
+  }
+
+  .video-nav {
+    width: 36px;
+    height: 36px;
+    margin: 0 8px;
+  }
+}
+
+/* =====================================================================
+   Large mobile / small tablet (601px – 767px) — 1 full card + peek
+   ===================================================================== */
+@media (max-width: 767px) {
+  .video-shell {
+    padding: 0 16px;
+  }
+
+  .video-heading {
+    margin-bottom: 10px;
+  }
+
+  .video-underline {
+    margin-bottom: 20px;
+  }
+
+  .video-card {
+    flex: 0 0 100%; /* exactly 1 video visible, no peek of next */
+  }
+
+  .video-thumb-wrap {
+    aspect-ratio: 4 / 3; /* taller card on mobile */
+  }
+
+  .video-track {
+    gap: 16px;
+  }
+}
+
+/* =====================================================================
+   Mobile (<= 600px) — nav arrows overlay the track edges so the card
+   gets almost the full screen width
+   ===================================================================== */
+@media (max-width: 600px) {
+  .video-section {
+    padding: 24px 0; /* less top/bottom breathing room on phones */
+  }
+
+  .video-underline {
+    margin-bottom: 14px;
+  }
+
+  .video-shell {
+    padding: 0 10px;
+  }
+
+  .video-card {
+    flex: 0 0 100%; /* exactly 1 video visible */
+    margin: 0;
+  }
+
+  .video-thumb-wrap {
+    aspect-ratio: 4 / 3; /* taller card on mobile */
+  }
+
+  .video-carousel {
+    position: relative;
+  }
+
+  .video-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+    /* Phones only: hidden until the carousel is touched/tapped */
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .video-carousel:hover .video-nav,
+  .video-carousel:focus-within .video-nav,
+  .video-carousel--active .video-nav {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .video-nav--prev {
+    left: 2px;
+  }
+
+  .video-nav--next {
+    right: 2px;
+  }
+
+  .video-track {
+    gap: 12px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .video-heading {
+    font-size: 20px;
+  }
+
+  .video-card {
+    flex: 0 0 100%;
+  }
+}
+
+/* =====================================================================
+   Video modal
+   ===================================================================== */
+
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.video-modal {
+  width: 100%;
+  max-width: 810px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 21px;
+  font-weight: 400;
+  color: #1f2937;
+  text-align: left;
+}
+
+.video-modal-body {
+  padding: 16px;
+}
+
+.video-modal-embed-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 50%; /* shorter video area on desktop/laptop/tablet */
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.video-modal-embed-wrap .video-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+}
+
+.video-modal-footer {
+  padding: 12px 24px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.video-modal-close {
+  background: #6b7280;
+  color: #ffffff;
+  border: none;
+  padding: 9px 22px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.video-modal-close:hover {
+  background: #4b5563;
+}
+
+/* Tablet modal */
+@media (max-width: 900px) {
+  .video-modal {
+    max-width: 640px;
+  }
+}
+
+/* Phone modal — centered on screen, standard 16:9 video */
+@media (max-width: 600px) {
+  .video-modal-overlay {
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-modal {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: auto;
+  }
+
+  .video-modal-header {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+
+  .video-modal-body {
+    padding: 10px;
+  }
+
+  .video-modal-embed-wrap {
+    padding-top: 100%; /* taller video area on phones */
+  }
+
+  .video-modal-footer {
+    padding: 10px 16px 16px;
+  }
+}

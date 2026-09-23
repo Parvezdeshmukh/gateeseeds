@@ -1,0 +1,79 @@
+/* Self-contained, overlap-proof styles.
+   Uses its own class names (not "section"/"shell") so it can't
+   accidentally inherit a negative margin or absolute positioning
+   from another shared class in the project. */
+
+.presence-section {
+  position: relative;   /* creates a new stacking/layout context */
+  isolation: isolate;   /* stops child z-index / stacking leaking out */
+  display: block;
+  width: 100%;
+  padding: 60px 0;
+  margin: 0;             /* no negative margins, ever */
+  overflow: visible;
+  background: #fff;
+  clear: both;           /* guards against any floated neighbour */
+}
+
+.presence-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.presence-map {
+  width: 100%;
+}
+
+.presence-map img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.presence-content {
+  min-width: 0; /* prevents text from forcing the grid to overflow */
+}
+
+.presence-eyebrow {
+  color: #c9880a;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px;
+}
+
+.presence-heading {
+  color: #14532d;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  margin: 0 0 20px;
+}
+
+.presence-text {
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+
+@media (max-width: 768px) {
+  .presence-section {
+    padding: 40px 0;
+  }
+
+  .presence-shell {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .presence-map {
+    order: -1;
+  }
+}

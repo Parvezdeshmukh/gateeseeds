@@ -15,7 +15,7 @@ export default function AboutPage() {
   useEffect(() => {
     setPageMeta(
       'About | GATEE SEEDS PVT. LTD.',
-      'GATEE SEEDS PVT. LTD. packs four onion seed varieties as sortexed seed in sealed 1 kg cartons from Chhatrapati Sambhajinagar, Maharashtra.'
+      'GATEE SEEDS PVT. LTD. packs four onion seed varieties as sortexed seed in sealed cartons from Chhatrapati Sambhajinagar, Maharashtra.'
     )
   }, [])
 

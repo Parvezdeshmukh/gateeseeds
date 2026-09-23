@@ -1,0 +1,65 @@
+.achievements-section {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  margin: 0;
+  padding: 48px 0;
+  background: transparent;
+  border: none;
+  text-align: center;
+}
+
+.achievements-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.achievements-heading {
+  color: #16a34a;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  margin: 0 0 40px;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.achievements-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.achievements-value {
+  color: #111827;
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums; /* stops digits jittering in width while counting */
+}
+
+.achievements-label {
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .achievements-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+}
