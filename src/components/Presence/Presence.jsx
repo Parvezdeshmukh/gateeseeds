@@ -1,4 +1,4 @@
-import mapImg from '../../assets/map.png'
+import mapImg from '../../assets/mpp.png'
 import './Presence.css'
 
 export default function Presence() {
