@@ -61,3 +61,37 @@
 @media (max-width: 760px) {
   .process__step::after { display: none; }
 }
+/* Add this AFTER the existing @media (max-width: 760px) block in
+   Process.css — 2 columns x 2 rows on mobile. */
+
+@media (max-width: 600px) {
+  .process__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem 1rem;
+  }
+
+  .process__step {
+    padding-top: 0;
+  }
+
+  .process__icon {
+    width: 46px;
+    height: 46px;
+    font-size: 1.15rem;
+  }
+
+  .process__n {
+    font-size: 0.72rem;
+    margin: 0.6rem 0 0.15rem;
+  }
+
+  .process__step h3 {
+    font-size: 0.98rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .process__step p {
+    font-size: 0.85rem;
+    max-width: none;
+  }
+}

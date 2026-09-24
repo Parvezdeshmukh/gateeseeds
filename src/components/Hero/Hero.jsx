@@ -5,6 +5,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 import hero1 from '../../assets/hero-1.jpg'
 import hero2 from '../../assets/hero-2.jpg'
 import hero3 from '../../assets/hero-3.jpg'
+import hero4 from '../../assets/hero-4.jpeg'
 import { whatsappLink } from '../../utils/whatsapp'
 import './Hero.css'
 
@@ -26,7 +27,14 @@ const slides = [
     alt: 'Golden brown Puna Fursungi Gavran onion bulbs',
     title: ['Grow with confidence.', 'Choose better seed.'],
     text: 'Ask about any variety on WhatsApp and get details the same day.'
-  }
+  },
+  {
+  image: hero4,
+  alt: 'Onion crop grown for export-quality production',
+  title: ['Premium Onion Seeds.', 'Better Crops.'],
+  text: 'Quality seeds for healthy growth and better harvests.'
+}
+
 ]
 
 const INTERVAL = 5200

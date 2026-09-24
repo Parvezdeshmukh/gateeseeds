@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './Testimonials.css'
+import './Review.css'
 
 // Add / edit testimonials here.
 const testimonials = [

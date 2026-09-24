@@ -11,6 +11,21 @@ import onionWhite from '../assets/onion-super-white.jpg'
 import onionFursungi from '../assets/onion-puna-fursungi.jpg'
 import onionExport from '../assets/onion-export-special.jpg'
 
+// Added — general onion crop / packaging photos.
+// IMPORTANT: these files must sit directly in src/assets/gallery/
+// (NOT in a src/assets/gallery/onion/ subfolder) — same folder as the
+// carton/label images above.
+import onionGoldenCluster from '../../src/assets/gallery/onion/onion-golden-cluster.jpg'
+import onionWhiteCluster from '../../src/assets/gallery/onion/onion-white-cluster.jpg'
+import onionRedCluster from '../../src/assets/gallery/onion/onion-red-cluster.jpg'
+import onionFieldRow from '../../src/assets/gallery/onion/onion-field-row.jpg'
+import onionGoldenHarvest from '../../src/assets/gallery/onion/onion-golden-harvest.jpg'
+import onionWhitePack from '../../src/assets/gallery/onion/onion-white-pack.jpg'
+import onionPurplePack from '../../src/assets/gallery/onion/onion-purple-pack.jpg' 
+import onionRedPack from '../../src/assets/gallery/onion/onion-red-pack.jpg'
+import onionPinkPairPack from '../../src/assets/gallery/onion/onion-pink-pair-pack.jpg'
+import onionRedCutPack from '../../src/assets/gallery/onion/onion-red-cut-pack.jpg'
+
 /**
  * Gallery images. All of these come from GATEE SEEDS pack artwork.
  * Add field, crop, storage and godown photographs here as they become available.
@@ -27,7 +42,21 @@ const galleryItems = [
   { id: 'g9', src: onionExport, category: 'Onion Crops', title: 'Export Special onion', alt: 'Deep red export grade onion bulb', size: 'wide' },
   { id: 'g10', src: cartonWhite, category: 'Packaging', title: 'Super White carton', alt: 'Printed carton artwork for Super White onion seed', size: 'wide' },
   { id: 'g11', src: labelExport, category: 'Packaging', title: 'Export Special pack face', alt: 'Front face of the Onion Export Special seed pack', size: 'tall' },
-  { id: 'g12', src: cartonFursungi, category: 'Packaging', title: 'Puna Fursungi carton', alt: 'Printed carton artwork for Puna Fursungi Gavran onion seed', size: 'wide' }
+  { id: 'g12', src: cartonFursungi, category: 'Packaging', title: 'Puna Fursungi carton', alt: 'Printed carton artwork for Puna Fursungi Gavran onion seed', size: 'wide' },
+
+  // Added — general onion crop photos
+  { id: 'g13', src: onionGoldenCluster, category: 'Onion Crops', title: 'Golden Onion', alt: 'Golden onions with green stem, freshly picked', size: 'wide' },
+  { id: 'g14', src: onionWhiteCluster, category: 'Onion Crops', title: 'White Onion', alt: 'Cluster of white onions with green stems', size: 'wide' },
+  { id: 'g15', src: onionRedCluster, category: 'Onion Crops', title: 'Red Onion', alt: 'Close-up pile of red onions', size: 'wide' },
+  { id: 'g16', src: onionFieldRow, category: 'Onion Crops', title: 'Onion Field', alt: 'Row of onions growing in the field with green tops', size: 'wide' },
+  { id: 'g17', src: onionGoldenHarvest, category: 'Onion Crops', title: 'Golden Onion Harvest', alt: 'Large harvest pile of golden onions', size: 'wide' },
+
+  // Added — packaging cutout images
+  { id: 'g18', src: onionWhitePack, category: 'Packaging', title: 'White Onion', alt: 'White onion product cutout', size: 'tall' },
+  { id: 'g19', src: onionPurplePack, category: 'Packaging', title: 'Purple Onion', alt: 'Purple onion product cutout', size: 'tall' },
+  { id: 'g20', src: onionRedPack, category: 'Packaging', title: 'Red Onion', alt: 'Red onion product cutout', size: 'tall' },
+  { id: 'g21', src: onionPinkPairPack, category: 'Packaging', title: 'Pink Onion', alt: 'Pair of pink onions product cutout', size: 'tall' },
+  { id: 'g22', src: onionRedCutPack, category: 'Packaging', title: 'Red Onion (Cut)', alt: 'Red onions with one sliced open, showing the interior', size: 'tall' },
 ]
 
 export const galleryCategories = ['All', 'Onion Crops', 'Packaging']

@@ -1,26 +1,44 @@
 import { useEffect, useState } from 'react'
-import { FiX } from 'react-icons/fi'
+import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import galleryItems, { galleryCategories } from '../../data/gallery'
+import useReveal from '../../hooks/useReveal'
 import './Gallery.css'
 
 export default function Gallery({ limit }) {
   const [filter, setFilter] = useState('All')
-  const [lightbox, setLightbox] = useState(null)
+  const [lightboxIndex, setLightboxIndex] = useState(null) // index into `visible`, or null
+
+  // Re-run the reveal observer every time the filter changes, so newly
+  // rendered items (that were never scrolled into view before) get
+  // observed and receive the `is-visible` class instead of staying hidden.
+  useReveal([filter])
 
   const visible = galleryItems
     .filter((item) => filter === 'All' || item.category === filter)
     .slice(0, limit || galleryItems.length)
 
+  const lightbox = lightboxIndex !== null ? visible[lightboxIndex] : null
+
+  const closeLightbox = () => setLightboxIndex(null)
+  const showPrev = () =>
+    setLightboxIndex((i) => (i - 1 + visible.length) % visible.length)
+  const showNext = () => setLightboxIndex((i) => (i + 1) % visible.length)
+
   useEffect(() => {
-    if (!lightbox) return undefined
-    const onKey = (e) => e.key === 'Escape' && setLightbox(null)
+    if (lightboxIndex === null) return undefined
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeLightbox()
+      if (e.key === 'ArrowLeft') showPrev()
+      if (e.key === 'ArrowRight') showNext()
+    }
     window.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
     return () => {
       window.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
     }
-  }, [lightbox])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lightboxIndex])
 
   return (
     <section className="section gallery" id="gallery" aria-labelledby="gallery-heading">
@@ -58,7 +76,7 @@ export default function Gallery({ limit }) {
               data-reveal
               data-delay={i % 4}
             >
-              <button type="button" onClick={() => setLightbox(item)}>
+              <button type="button" onClick={() => setLightboxIndex(i)}>
                 <img src={item.src} alt={item.alt} loading="lazy" />
                 <span className="gallery__overlay">
                   <span className="gallery__title">{item.title}</span>
@@ -76,16 +94,44 @@ export default function Gallery({ limit }) {
           role="dialog"
           aria-modal="true"
           aria-label={lightbox.title}
-          onClick={() => setLightbox(null)}
+          onClick={closeLightbox}
         >
           <button
             type="button"
             className="gallery__close"
-            onClick={() => setLightbox(null)}
+            onClick={closeLightbox}
             aria-label="Close image"
           >
             <FiX />
           </button>
+
+          {visible.length > 1 && (
+            <>
+              <button
+                type="button"
+                className="gallery__nav gallery__nav--prev"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  showPrev()
+                }}
+                aria-label="Previous image"
+              >
+                <FiChevronLeft />
+              </button>
+              <button
+                type="button"
+                className="gallery__nav gallery__nav--next"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  showNext()
+                }}
+                aria-label="Next image"
+              >
+                <FiChevronRight />
+              </button>
+            </>
+          )}
+
           <figure onClick={(e) => e.stopPropagation()}>
             <img src={lightbox.src} alt={lightbox.alt} />
             <figcaption>{lightbox.title}</figcaption>

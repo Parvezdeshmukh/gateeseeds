@@ -8,7 +8,7 @@ import AgricultureBanner from '../../components/AgricultureBanner/AgricultureBan
 import Process from '../../components/Process/Process'
 import VideoPerspective from '../../components/VideoPerspective/VideoPerspective'
 import Gallery from '../../components/Gallery/Gallery'
-import Testimonials from '../../components/Testimonial/Testimonials'
+import Review from '../../components/Review/Review'
 import EnquiryCTA from '../../components/EnquiryCTA/EnquiryCTA'
 import FAQ from '../../components/FAQ/FAQ'
 import FinalCTA from '../../components/FinalCTA/FinalCTA'
@@ -40,7 +40,7 @@ export default function Home() {
       <Process />
       <VideoPerspective/> 
       <Gallery limit={8} />
-      <Testimonials />
+      <Review />
       <EnquiryCTA />
       <FAQ />
       <FinalCTA />

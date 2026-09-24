@@ -155,6 +155,53 @@
 
 .gallery__close:hover { background: var(--green); }
 
+/* Add this to Gallery.css, near .gallery__close */
+
+.gallery__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.gallery__nav:hover {
+  background: var(--green);
+}
+
+.gallery__nav--prev {
+  left: 1rem;
+}
+
+.gallery__nav--next {
+  right: 1rem;
+}
+
+@media (max-width: 640px) {
+  .gallery__nav {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+
+  .gallery__nav--prev {
+    left: 0.4rem;
+  }
+
+  .gallery__nav--next {
+    right: 0.4rem;
+  }
+}
+
 @keyframes lbIn {
   from { opacity: 0; }
   to { opacity: 1; }

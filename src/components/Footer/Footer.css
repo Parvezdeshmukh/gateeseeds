@@ -69,6 +69,34 @@
   transform: translateY(-3px);
 }
 
+/* Brand colors — applied always, not just on hover.
+   These target the link by its href, so they work automatically as long
+   as each <a> points to the platform's URL (youtube.com / instagram.com /
+   wa.me or whatsapp.com) — no extra classes needed. */
+.footer__social a[href*="youtube"] {
+  background: #ff0000;
+  border-color: #ff0000;
+}
+
+.footer__social a[href*="instagram"] {
+  background: #c13584;
+  border-color: #c13584;
+}
+
+.footer__social a[href*="wa.me"],
+.footer__social a[href*="whatsapp"] {
+  background: #25d366;
+  border-color: #25d366;
+}
+
+.footer__social a[href*="youtube"]:hover,
+.footer__social a[href*="instagram"]:hover,
+.footer__social a[href*="wa.me"]:hover,
+.footer__social a[href*="whatsapp"]:hover {
+  filter: brightness(1.12);
+  transform: translateY(-3px);
+}
+
 .footer__col h2 {
   font-size: 1.02rem;
   color: #fff;
@@ -107,6 +135,14 @@
 
 .footer__contact svg { color: var(--gold); margin-top: 0.3rem; flex: none; }
 
+/* Different icon color per contact item, in the order they appear in the
+   list (1st = phone, 2nd = email, 3rd = address, 4th = WhatsApp — adjust
+   the nth-child numbers below if your actual order differs). */
+.footer__contact li:nth-child(1) svg { color: var(--green); }
+.footer__contact li:nth-child(2) svg { color: var(--gold); }
+.footer__contact li:nth-child(3) svg { color: var(--green-dark, #14532d); }
+.footer__contact li:nth-child(4) svg { color: #25d366; } /* WhatsApp */
+
 .footer__contact span { display: flex; flex-direction: column; gap: 0.25rem; }
 
 .footer__contact address {
@@ -138,7 +174,72 @@
   .footer__brand { grid-column: 1 / -1; }
 }
 
+/* Polished mobile layout: brand section centered on its own row,
+   then a clean 2-column grid for the nav/contact columns. */
 @media (max-width: 560px) {
-  .footer__grid { grid-template-columns: 1fr; }
-  .footer__barInner { justify-content: center; text-align: center; }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.4rem;
+    padding-block: 2.4rem 2.8rem;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .footer__id {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .footer__logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .footer__brand p {
+    max-width: 34ch;
+    margin-inline: auto;
+  }
+
+  .footer__social {
+    justify-content: center;
+    margin-top: 1.2rem;
+  }
+
+  .footer__col h2 {
+    font-size: 0.92rem;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer__col h2::after {
+    width: 32px;
+  }
+
+  .footer__col ul {
+    gap: 0.55rem;
+    font-size: 0.87rem;
+  }
+
+  .footer__contact li {
+    gap: 0.5rem;
+  }
+
+  .footer__contact svg {
+    width: 15px;
+    height: 15px;
+    margin-top: 0.2rem;
+  }
+
+  .footer__barInner {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.3rem;
+    padding-block: 1.3rem;
+    font-size: 0.8rem;
+  }
 }
