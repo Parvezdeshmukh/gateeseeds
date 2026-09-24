@@ -1,26 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './Review.css'
 
 // Add / edit testimonials here.
 const testimonials = [
   {
-    lead: 'एलोरा रमन -',
-    quote: 'अंकुरण क्षमता अच्छी है और उत्पादन भी अच्छी गुणवत्ता का है और बाजार में इसकी मांग बहुत अधिक है',
-    name: 'हन्ना नाली',
-    location: 'आसाम भोगड़िया',
+    lead: 'Gatee Seeds -',
+    quote:
+      'Pyaz ka ankuran bahut accha hua aur size bhi ekdum uniform mila, quality dekh kar market mein demand turant ban gayi.',
+    name: 'Parvez Deshmukh',
+    location: 'Maharashtra',
   },
   {
-    lead: 'एलोरा सुपर 313 -',
-    quote: 'बीज की गुणवत्ता बहुत बढ़िया है, अंकुरण अच्छा हुआ और फसल स्वस्थ है',
-    name: 'रमेश पटेल',
-    location: 'गुजरात',
+    lead: 'Gatee Seeds -',
+    quote:
+      'Onion ki fasal is baar bahut healthy nikli, rate bhi accha mila aur beej ki germination pichle saalon se kaafi behtar thi.',
+    name: 'Abuzar Shaikh',
+    location: 'Maharashtra',
   },
-  {
-    lead: 'एलोरा कमांडो-1112 -',
-    quote: 'उत्पादन क्षमता शानदार है, पिछले साल से काफी बेहतर परिणाम मिले',
-    name: 'सुरेश यादव',
-    location: 'मध्य प्रदेश',
-  },
+]
+
+// Review videos carousel — shown on the left.
+// Replace videoId with your real YouTube video IDs
+// (the part after "v=" in a YouTube URL, e.g. https://www.youtube.com/watch?v=XXXXXXXXXXX)
+const reviewVideos = [
+  { videoId: 'PwbOWrzTrAA', title: 'Testimonial' },
+  { videoId: 'YYYYYYYYYYY', title: 'Testimonial' },
+  { videoId: 'ZZZZZZZZZZZ', title: 'Testimonial' },
 ]
 
 const AUTO_ROTATE_MS = 4500
@@ -28,16 +33,15 @@ const AUTO_ROTATE_MS = 4500
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
-
-  useEffect(() => {
-    if (isHovering || testimonials.length <= 1) return
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length)
-    }, AUTO_ROTATE_MS)
-    return () => clearInterval(timer)
-  }, [isHovering])
+  const [videoIndex, setVideoIndex] = useState(0)
 
   const active = testimonials[activeIndex]
+  const activeVideo = reviewVideos[videoIndex]
+
+  const showPrevVideo = () =>
+    setVideoIndex((i) => (i - 1 + reviewVideos.length) % reviewVideos.length)
+  const showNextVideo = () =>
+    setVideoIndex((i) => (i + 1) % reviewVideos.length)
 
   return (
     <section
@@ -50,19 +54,64 @@ export default function Testimonials() {
 
       <div className="testi-shell">
         <div className="testi-intro">
-          <span className="testi-kicker">TESTIMONIALS</span>
-          <h2 id="testi-heading" className="testi-heading">
-            What our Farmers
-            <br />
-            are talking about
-            <br />
-            us.
-          </h2>
+          <div className="testi-video-carousel">
+            <div className="testi-video-wrap" key={activeVideo.videoId}>
+              {/* Live YouTube embed — no autoplay, so it shows YouTube's own
+                  title bar / channel avatar / play button / "Watch on
+                  YouTube" chrome. Clicking it plays right here, inline —
+                  no modal. */}
+              <iframe
+                className="testi-video"
+                src={`https://www.youtube.com/embed/${activeVideo.videoId}`}
+                title={activeVideo.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+
+            {reviewVideos.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className="testi-video-nav testi-video-nav--prev"
+                  onClick={showPrevVideo}
+                  aria-label="Previous video"
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  className="testi-video-nav testi-video-nav--next"
+                  onClick={showNextVideo}
+                  aria-label="Next video"
+                >
+                  →
+                </button>
+                <div className="testi-video-dots" role="tablist" aria-label="Select video">
+                  {reviewVideos.map((v, i) => (
+                    <button
+                      key={v.videoId + i}
+                      type="button"
+                      className={`testi-video-dot ${i === videoIndex ? 'is-active' : ''}`}
+                      onClick={() => setVideoIndex(i)}
+                      role="tab"
+                      aria-selected={i === videoIndex}
+                      aria-label={`Show video ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         <span className="testi-divider" aria-hidden="true" />
 
         <div className="testi-card-wrap">
+          <span className="testi-kicker testi-kicker--right" id="testi-heading">
+            TESTIMONIALS
+          </span>
           <div className="testi-card" key={activeIndex}>
             <p className="testi-quote">
               <span className="testi-lead">{active.lead}</span> {active.quote}
