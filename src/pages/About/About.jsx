@@ -7,9 +7,11 @@ import EnquiryCTA from '../../components/EnquiryCTA/EnquiryCTA'
 import { labelStandards, recommendedStates } from '../../data/onionSeeds'
 import useReveal from '../../hooks/useReveal'
 import { setPageMeta } from '../../utils/seo'
+import { useLanguage } from '../../context/LanguageContext'
 import './About.css'
 
 export default function AboutPage() {
+  const { t } = useLanguage()
   useReveal()
 
   useEffect(() => {
@@ -21,11 +23,13 @@ export default function AboutPage() {
 
   return (
     <>
-      <PageHeader
-        title="About GATEE SEEDS"
-        subtitle="An onion seed company working out of Chauka, Chhatrapati Sambhajinagar, Maharashtra."
-        crumbs={[{ label: 'About Us' }]}
-      />
+     <PageHeader
+  title={t.about.eyebrow}
+  subtitle={t.about.description1}
+  crumbs={[
+    { label: t.navbar.about }
+  ]}
+/>
 
       <AboutSection />
 

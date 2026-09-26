@@ -42,6 +42,34 @@
 
 .topbar__wa svg { color: #6ee7a3; }
 
+.lang-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(214, 162, 58, 0.2);
+  color: #fff; /* Normal text white */
+  border: 1px solid #D6A23A;
+    border-radius: 5px;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.lang-switcher-btn svg {
+  color: #fff; /* Normal icon white */
+}
+
+.lang-switcher-btn:hover {
+  background: #D6A23A;
+  color: #000; /* Hover text black */
+  transform: scale(1.04);
+}
+
+.lang-switcher-btn:hover svg {
+  color: #000; /* Hover icon black */
+}
+
 @media (max-width: 900px) {
   .topbar__mail,
   .topbar__place { display: none; }
@@ -54,3 +82,5 @@
   .topbar__wa span { display: none; }
   .topbar__wa svg { font-size: 1.15rem; }
 }
+
+

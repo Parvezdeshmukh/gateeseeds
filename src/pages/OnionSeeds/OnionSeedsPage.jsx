@@ -6,9 +6,11 @@ import FAQ from '../../components/FAQ/FAQ'
 import { labelStandards } from '../../data/onionSeeds'
 import useReveal from '../../hooks/useReveal'
 import { setPageMeta } from '../../utils/seo'
+import { useLanguage } from '../../context/LanguageContext'
 import './OnionSeedsPage.css'
 
 export default function OnionSeedsPage() {
+  const { t } = useLanguage()
   useReveal()
 
   useEffect(() => {
@@ -20,11 +22,13 @@ export default function OnionSeedsPage() {
 
   return (
     <>
-      <PageHeader
-        title="Onion seeds"
-        subtitle="Four selections packed under the GATEE SEEDS label, each as sortexed seed in a sealed 1 kg carton."
-        crumbs={[{ label: 'Onion Seeds' }]}
-      />
+     <PageHeader
+  title={t.onionSeeds.title}
+  subtitle={t.onionSeeds.description}
+  crumbs={[
+    { label: t.onionDetails.onionSeeds }
+  ]}
+/>
 
       <OnionSeeds showAll heading="The full range" />
 

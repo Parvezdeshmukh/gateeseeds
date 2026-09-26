@@ -13,27 +13,48 @@ const siteConfig = {
       "GATEE SEEDS PVT. LTD. produces and markets onion seed, packed and labelled for farm supply across Maharashtra and neighbouring states.",
   },
 
-  contact: {
-    // Printed on the carton as Customer Care
-    phonePrimary: "+918380887058",
-    phonePrimaryDisplay: "+91 83808 87058",
-    phoneSecondary: "+918380887058",
-    phoneSecondaryDisplay: "+91 83808 87058",
+ contact: {
+  // Printed on the carton as Customer Care
+  phonePrimary: "+918380887058",
+  phonePrimaryDisplay: "+91 83808 87058",
+  phoneSecondary: "+918380887058",
+  phoneSecondaryDisplay: "+91 83808 87058",
 
-    // WhatsApp number in international format, digits only (country code + number)
-    whatsapp: "+918380887058",
+  // WhatsApp number in international format
+  whatsapp: "+918380887058",
 
-    // TODO: replace with the official GATEE SEEDS email address
-    email: "gatee.seeds.pvt.ltd@gmail.com",
+  // Official GATEE SEEDS email address
+  email: "gatee.seeds.pvt.ltd@gmail.com",
 
-    addressLines: [
+  addressLines: {
+    en: [
       "GATEE SEEDS PVT. LTD.",
       "Gut No. 122, Lad Sawangi Road, Chauka,",
       "Chhatrapati Sambhajinagar (Aurangabad) – 431008,",
       "Maharashtra, India",
     ],
-    addressShort: "Chauka, Chhatrapati Sambhajinagar (Aurangabad), Maharashtra",
+
+    hi: [
+      "GATEE SEEDS प्रा. लि.",
+      "गट नं. 122, लाड सावंगी रोड, चौका,",
+      "छत्रपति संभाजीनगर (औरंगाबाद) – 431008,",
+      "महाराष्ट्र, भारत",
+    ],
+
+    ma: [
+      "GATEE SEEDS प्रा. लि.",
+      "गट नं. 122, लाड सावंगी रोड, चौका,",
+      "छत्रपती संभाजीनगर (औरंगाबाद) – 431008,",
+      "महाराष्ट्र, भारत",
+    ],
   },
+
+  addressShort: {
+    en: "Chauka, Chhatrapati Sambhajinagar (Aurangabad), Maharashtra",
+    hi: "चौका, छत्रपति संभाजीनगर (औरंगाबाद), महाराष्ट्र",
+    ma: "चौका, छत्रपती संभाजीनगर (औरंगाबाद), महाराष्ट्र",
+  },
+},
 
   // All office / branch locations shown on the Map section.
   // Add or remove entries here to update the map tabs everywhere on the site.
@@ -79,12 +100,34 @@ const siteConfig = {
     youtube: "https://www.youtube.com/@Gateeseedspvtltd",
   },
 
-  messages: {
+
+messages: {
+  en: {
     general:
       "Hello GATEE SEEDS, I would like to enquire about your onion seed products.",
+
     product: (productName) =>
       `Hello GATEE SEEDS, I would like to enquire about ${productName}. Please share more details.`,
   },
+
+  hi: {
+    general:
+      "नमस्ते GATEE SEEDS, मैं आपके प्याज के बीज उत्पादों के बारे में पूछताछ करना चाहता हूँ।",
+
+    product: (productName) =>
+      `नमस्ते GATEE SEEDS, मैं ${productName} के बारे में पूछताछ करना चाहता हूँ। कृपया अधिक जानकारी साझा करें।`,
+  },
+
+  ma: {
+    general:
+      "नमस्कार GATEE SEEDS, मला आपल्या कांदा बियाण्यांच्या उत्पादनांबद्दल चौकशी करायची आहे.",
+
+    product: (productName) =>
+      `नमस्कार GATEE SEEDS, मला ${productName} बद्दल चौकशी करायची आहे. कृपया अधिक माहिती शेअर करा.`,
+  },
+},
+
+
 };
 
 export default siteConfig;

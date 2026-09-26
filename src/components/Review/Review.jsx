@@ -1,31 +1,45 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Review.css'
 
-// Add / edit testimonials here.
+import { useLanguage } from '../../context/LanguageContext'
+
+// =====================================================
+// Testimonials
+// Keep only keys here.
+// Actual translated text is inside translations.js
+// =====================================================
 const testimonials = [
   {
     lead: 'Gatee Seeds -',
-    quote:
-      'Pyaz ka ankuran bahut accha hua aur size bhi ekdum uniform mila, quality dekh kar market mein demand turant ban gayi.',
-    name: 'Parvez Deshmukh',
-    location: 'Maharashtra',
+    translationKey: 'testimonial1',
+    nameKey: 'parvezDeshmukh',
+    locationKey: 'maharashtra',
   },
   {
     lead: 'Gatee Seeds -',
-    quote:
-      'Onion ki fasal is baar bahut healthy nikli, rate bhi accha mila aur beej ki germination pichle saalon se kaafi behtar thi.',
-    name: 'Abuzar Shaikh',
-    location: 'Maharashtra',
+    translationKey: 'testimonial2',
+    nameKey: 'abuzarShaikh',
+    locationKey: 'maharashtra',
   },
 ]
 
-// Review videos carousel — shown on the left.
+// =====================================================
+// Review Videos
 // Replace videoId with your real YouTube video IDs
-// (the part after "v=" in a YouTube URL, e.g. https://www.youtube.com/watch?v=XXXXXXXXXXX)
+// =====================================================
 const reviewVideos = [
-  { videoId: 'PwbOWrzTrAA', title: 'Testimonial' },
-  { videoId: 'YYYYYYYYYYY', title: 'Testimonial' },
-  { videoId: 'ZZZZZZZZZZZ', title: 'Testimonial' },
+  {
+    videoId: 'PwbOWrzTrAA',
+    translationKey: 'video1',
+  },
+  {
+    videoId: 'YYYYYYYYYYY',
+    translationKey: 'video2',
+  },
+  {
+    videoId: 'ZZZZZZZZZZZ',
+    translationKey: 'video3',
+  },
 ]
 
 const AUTO_ROTATE_MS = 4500
@@ -35,106 +49,272 @@ export default function Testimonials() {
   const [isHovering, setIsHovering] = useState(false)
   const [videoIndex, setVideoIndex] = useState(0)
 
+  const { t } = useLanguage()
+
+  const reviewText = t.testimonials
+
   const active = testimonials[activeIndex]
   const activeVideo = reviewVideos[videoIndex]
 
-  const showPrevVideo = () =>
-    setVideoIndex((i) => (i - 1 + reviewVideos.length) % reviewVideos.length)
-  const showNextVideo = () =>
-    setVideoIndex((i) => (i + 1) % reviewVideos.length)
+  // =====================================================
+  // Get translated testimonial
+  // =====================================================
+  const activeTestimonial =
+    reviewText.items?.[active.translationKey] || {
+      quote: '',
+    }
+
+  // =====================================================
+  // Get translated person name
+  // =====================================================
+  const activeName =
+    reviewText.people?.[active.nameKey] ||
+    active.nameKey
+
+  // =====================================================
+  // Get translated location
+  // =====================================================
+  const activeLocation =
+    reviewText.locations?.[active.locationKey] ||
+    active.locationKey
+
+  // =====================================================
+  // Get translated video title
+  // =====================================================
+  const activeVideoText =
+    reviewText.videos?.[
+      activeVideo.translationKey
+    ] || {
+      title: 'Testimonial',
+    }
+
+  // =====================================================
+  // Previous Video
+  // =====================================================
+  const showPrevVideo = () => {
+    setVideoIndex(
+      (i) =>
+        (i - 1 + reviewVideos.length) %
+        reviewVideos.length
+    )
+  }
+
+  // =====================================================
+  // Next Video
+  // =====================================================
+  const showNextVideo = () => {
+    setVideoIndex(
+      (i) =>
+        (i + 1) % reviewVideos.length
+    )
+  }
+
+  // =====================================================
+  // Auto Rotate Testimonials
+  // =====================================================
+  useEffect(() => {
+    if (isHovering) return
+
+    const timer = setInterval(() => {
+      setActiveIndex(
+        (i) =>
+          (i + 1) % testimonials.length
+      )
+    }, AUTO_ROTATE_MS)
+
+    return () => clearInterval(timer)
+  }, [isHovering])
 
   return (
     <section
       className="testi-section"
       aria-labelledby="testi-heading"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      onMouseEnter={() =>
+        setIsHovering(true)
+      }
+      onMouseLeave={() =>
+        setIsHovering(false)
+      }
     >
-      <span className="testi-corner" aria-hidden="true" />
+      <span
+        className="testi-corner"
+        aria-hidden="true"
+      />
 
       <div className="testi-shell">
+
+        {/* =================================================
+            VIDEO SECTION
+        ================================================== */}
         <div className="testi-intro">
           <div className="testi-video-carousel">
-            <div className="testi-video-wrap" key={activeVideo.videoId}>
-              {/* Live YouTube embed — no autoplay, so it shows YouTube's own
-                  title bar / channel avatar / play button / "Watch on
-                  YouTube" chrome. Clicking it plays right here, inline —
-                  no modal. */}
+
+            {/* YouTube Video */}
+            <div
+              className="testi-video-wrap"
+              key={activeVideo.videoId}
+            >
               <iframe
                 className="testi-video"
                 src={`https://www.youtube.com/embed/${activeVideo.videoId}`}
-                title={activeVideo.title}
+                title={
+                  activeVideoText.title
+                }
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             </div>
 
+            {/* Video Navigation */}
             {reviewVideos.length > 1 && (
               <>
+                {/* Previous Video */}
                 <button
                   type="button"
                   className="testi-video-nav testi-video-nav--prev"
                   onClick={showPrevVideo}
-                  aria-label="Previous video"
+                  aria-label={
+                    reviewText.previousVideo
+                  }
                 >
                   ←
                 </button>
+
+                {/* Next Video */}
                 <button
                   type="button"
                   className="testi-video-nav testi-video-nav--next"
                   onClick={showNextVideo}
-                  aria-label="Next video"
+                  aria-label={
+                    reviewText.nextVideo
+                  }
                 >
                   →
                 </button>
-                <div className="testi-video-dots" role="tablist" aria-label="Select video">
-                  {reviewVideos.map((v, i) => (
-                    <button
-                      key={v.videoId + i}
-                      type="button"
-                      className={`testi-video-dot ${i === videoIndex ? 'is-active' : ''}`}
-                      onClick={() => setVideoIndex(i)}
-                      role="tab"
-                      aria-selected={i === videoIndex}
-                      aria-label={`Show video ${i + 1}`}
-                    />
-                  ))}
+
+                {/* Video Dots */}
+                <div
+                  className="testi-video-dots"
+                  role="tablist"
+                  aria-label={
+                    reviewText.selectVideo
+                  }
+                >
+                  {reviewVideos.map(
+                    (video, i) => (
+                      <button
+                        key={
+                          video.videoId + i
+                        }
+                        type="button"
+                        className={`testi-video-dot ${
+                          i === videoIndex
+                            ? 'is-active'
+                            : ''
+                        }`}
+                        onClick={() =>
+                          setVideoIndex(i)
+                        }
+                        role="tab"
+                        aria-selected={
+                          i === videoIndex
+                        }
+                        aria-label={`${reviewText.showVideo} ${
+                          i + 1
+                        }`}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
           </div>
         </div>
 
-        <span className="testi-divider" aria-hidden="true" />
+        {/* =================================================
+            DIVIDER
+        ================================================== */}
+        <span
+          className="testi-divider"
+          aria-hidden="true"
+        />
 
+        {/* =================================================
+            TESTIMONIAL SECTION
+        ================================================== */}
         <div className="testi-card-wrap">
-          <span className="testi-kicker testi-kicker--right" id="testi-heading">
-            TESTIMONIALS
+
+          {/* Section Title */}
+          <span
+            className="testi-kicker testi-kicker--right"
+            id="testi-heading"
+          >
+            {reviewText.title}
           </span>
-          <div className="testi-card" key={activeIndex}>
+
+          {/* Active Testimonial */}
+          <div
+            className="testi-card"
+            key={activeIndex}
+          >
             <p className="testi-quote">
-              <span className="testi-lead">{active.lead}</span> {active.quote}
+              <span className="testi-lead">
+                {active.lead}
+              </span>{' '}
+              {activeTestimonial.quote}
             </p>
-            <p className="testi-name">{active.name}</p>
-            <p className="testi-location">{active.location}</p>
+
+            {/* Name */}
+            <p className="testi-name">
+              {activeName}
+            </p>
+
+            {/* Location */}
+            <p className="testi-location">
+              {activeLocation}
+            </p>
           </div>
 
+          {/* =================================================
+              TESTIMONIAL DOTS
+          ================================================== */}
           {testimonials.length > 1 && (
-            <div className="testi-dots" role="tablist" aria-label="Select testimonial">
-              {testimonials.map((t, i) => (
-                <button
-                  key={t.name + i}
-                  type="button"
-                  className={`testi-dot ${i === activeIndex ? 'is-active' : ''}`}
-                  onClick={() => setActiveIndex(i)}
-                  role="tab"
-                  aria-selected={i === activeIndex}
-                  aria-label={`Show testimonial ${i + 1}`}
-                />
-              ))}
+            <div
+              className="testi-dots"
+              role="tablist"
+              aria-label={
+                reviewText.selectTestimonial
+              }
+            >
+              {testimonials.map(
+                (testimonial, i) => (
+                  <button
+                    key={
+                      testimonial.nameKey + i
+                    }
+                    type="button"
+                    className={`testi-dot ${
+                      i === activeIndex
+                        ? 'is-active'
+                        : ''
+                    }`}
+                    onClick={() =>
+                      setActiveIndex(i)
+                    }
+                    role="tab"
+                    aria-selected={
+                      i === activeIndex
+                    }
+                    aria-label={`${reviewText.showTestimonial} ${
+                      i + 1
+                    }`}
+                  />
+                )
+              )}
             </div>
           )}
+
         </div>
       </div>
     </section>

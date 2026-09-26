@@ -5,9 +5,11 @@ import MapSection from '../../components/MapSection/MapSection'
 import FAQ from '../../components/FAQ/FAQ'
 import useReveal from '../../hooks/useReveal'
 import { setPageMeta } from '../../utils/seo'
+import { useLanguage } from '../../context/LanguageContext'
 import './ContactPage.css'
 
 export default function ContactPage() {
+  const { t } = useLanguage()
   useReveal()
 
   useEffect(() => {
@@ -19,11 +21,13 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHeader
-        title="Contact us"
-        subtitle="Call, message on WhatsApp, or send an enquiry with the variety and quantity you need."
-        crumbs={[{ label: 'Contact Us' }]}
-      />
+     <PageHeader
+  title={t.contactPage.pageTitle}
+  subtitle={t.contactPage.pageSubtitle}
+  crumbs={[
+    { label: t.contactPage.breadcrumb }
+  ]}
+/>
       <Contact />
       <MapSection />
       <FAQ />

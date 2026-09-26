@@ -1,30 +1,50 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
+
 import translations from '../translate/translations';
 
 const STORAGE_KEY = 'gatee-lang';
-const SUPPORTED = ['en', 'hi'];
+const SUPPORTED = ['en', 'hi', 'ma'];
 
 const LanguageContext = createContext(null);
 
-// Order of preference: saved choice -> browser language (Hindi) -> English
+// Default language: English
+// Saved language preference will be used if available.
 const getInitialLang = () => {
   try {
     const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (SUPPORTED.includes(saved)) return saved;
+
+    if (SUPPORTED.includes(saved)) {
+      return saved;
+    }
   } catch (error) {
     // Storage can be blocked (private mode). Ignore and continue.
   }
 
-  const browserLang = (typeof navigator !== 'undefined' && navigator.language) || 'en';
-  return browserLang.toLowerCase().startsWith('hi') ? 'hi' : 'en';
+  // Always default to English
+  return 'en';
 };
 
 export const LanguageProvider = ({ children }) => {
   const [lang, setLang] = useState(getInitialLang);
 
-  // Remember the choice and tell the browser which language the page is in
+  // Remember the selected language
+  // and set the correct HTML language attribute.
   useEffect(() => {
-    document.documentElement.lang = lang;
+    const htmlLang = {
+      en: 'en',
+      hi: 'hi',
+      ma: 'mr'
+    };
+
+    document.documentElement.lang = htmlLang[lang] || 'en';
+
     try {
       window.localStorage.setItem(STORAGE_KEY, lang);
     } catch (error) {
@@ -32,12 +52,21 @@ export const LanguageProvider = ({ children }) => {
     }
   }, [lang]);
 
+  // Manually set language
   const setLanguage = useCallback((next) => {
-    if (SUPPORTED.includes(next)) setLang(next);
+    if (SUPPORTED.includes(next)) {
+      setLang(next);
+    }
   }, []);
 
+  // Language order:
+  // English → Hindi → Marathi → English
   const toggleLanguage = useCallback(() => {
-    setLang((current) => (current === 'en' ? 'hi' : 'en'));
+    setLang((current) => {
+      if (current === 'en') return 'hi';
+      if (current === 'hi') return 'ma';
+      return 'en';
+    });
   }, []);
 
   const value = useMemo(
@@ -50,13 +79,21 @@ export const LanguageProvider = ({ children }) => {
     [lang, setLanguage, toggleLanguage]
   );
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
 };
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
+
   if (!context) {
-    throw new Error('useLanguage must be used inside <LanguageProvider>');
+    throw new Error(
+      'useLanguage must be used inside <LanguageProvider>'
+    );
   }
+
   return context;
 };

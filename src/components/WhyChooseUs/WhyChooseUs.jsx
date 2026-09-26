@@ -1,54 +1,82 @@
 import { PiPlantBold } from 'react-icons/pi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
 import { FiTruck, FiHeadphones } from 'react-icons/fi'
+
+import { useLanguage } from '../../context/LanguageContext'
+
 import './WhyChooseUs.css'
 
 const points = [
   {
     icon: PiPlantBold,
-    title: 'Sortexed onion seed',
-    text: 'Every variety is cleaned and sortexed before packing, and each carton carries its truthful label.'
+    key: 'sortexed',
   },
   {
     icon: TbBuildingWarehouse,
-    title: 'Sealed and stored',
-    text: 'Seed is packed in sealed 1 kg cartons and held in organised storage until it is dispatched.'
+    key: 'sealed',
   },
   {
     icon: FiTruck,
-    title: 'Straightforward supply',
-    text: 'Tell us the variety and quantity you need and we will confirm what can be supplied.'
+    key: 'supply',
   },
   {
     icon: FiHeadphones,
-    title: 'Reach a person',
-    text: 'Call or message on WhatsApp — the same numbers printed on the carton reach us directly.'
-  }
+    key: 'support',
+  },
 ]
 
 export default function WhyChooseUs() {
+  const { t } = useLanguage()
+
   return (
-    <section className="section why" id="why-choose-us" aria-labelledby="why-heading">
+    <section
+      className="section why"
+      id="why-choose-us"
+      aria-labelledby="why-heading"
+    >
       <div className="shell">
+
         <div className="section-head section-head--center">
-          <p className="eyebrow">Why GATEE SEEDS</p>
-          <h2 id="why-heading">What you can count on</h2>
+          <p className="eyebrow">
+            {t.whyChooseUs.eyebrow}
+          </p>
+
+          <h2 id="why-heading">
+            {t.whyChooseUs.title}
+          </h2>
         </div>
 
         <ul className="why__grid">
           {points.map((point, i) => {
             const Icon = point.icon
+            const item = t.whyChooseUs.points[point.key]
+
             return (
-              <li className="why__card" key={point.title} data-reveal data-delay={i % 4}>
-                <span className="why__icon" aria-hidden="true">
+              <li
+                className="why__card"
+                key={point.key}
+                data-reveal
+                data-delay={i % 4}
+              >
+                <span
+                  className="why__icon"
+                  aria-hidden="true"
+                >
                   <Icon />
                 </span>
-                <h3>{point.title}</h3>
-                <p>{point.text}</p>
+
+                <h3>
+                  {item.title}
+                </h3>
+
+                <p>
+                  {item.text}
+                </p>
               </li>
             )
           })}
         </ul>
+
       </div>
     </section>
   )
