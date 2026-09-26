@@ -15,7 +15,7 @@ export const translations = {
       callPrimary: "Call our main number",
       callSecondary: "Call our second number",
       email: "Send us an email",
-      switchLanguage: "Switch Language",
+      switchLanguage: "हिंदी",
       address:
         "Chauka, Chhatrapati Sambhajinagar (Aurangabad), Maharashtra",
     },
@@ -391,7 +391,7 @@ export const translations = {
       callPrimary: "मुख्य नंबर पर कॉल करें",
       callSecondary: "दूसरे नंबर पर कॉल करें",
       email: "हमें ईमेल भेजें",
-      switchLanguage: "भाषा बदलें",
+      switchLanguage: "मराठी",
       address:
         "चौका, छत्रपति संभाजीनगर (औरंगाबाद), महाराष्ट्र",
     },
@@ -774,7 +774,7 @@ export const translations = {
       callPrimary: "मुख्य क्रमांकावर कॉल करा",
       callSecondary: "दुसऱ्या क्रमांकावर कॉल करा",
       email: "आम्हाला ईमेल पाठवा",
-      switchLanguage: "भाषा बदला",
+      switchLanguage: "English",
       address:
         "चौका, छत्रपती संभाजीनगर (औरंगाबाद), महाराष्ट्र",
     },

@@ -12,6 +12,7 @@ import GalleryPage from './pages/Gallery/GalleryPage'
 import ContactPage from './pages/Contact/ContactPage'
 import NotFound from './pages/NotFound/NotFound'
 import Loader from './components/Loader/Loader'
+import ScrollToTop from './components/Scrollup/ScrollToTop'
 
 /** Scrolls to the top on route change, or to the hash target when there is one. */
 function ScrollManager() {
@@ -54,6 +55,7 @@ export default function App() {
 
       <Footer />
       <FloatingSocial />
+      <ScrollToTop />
     </>
   )
 }

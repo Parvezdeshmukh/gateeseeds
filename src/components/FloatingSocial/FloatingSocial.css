@@ -1,44 +1,51 @@
 .fs {
   position: fixed;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 70;
+  bottom: 150px;
+  left: 0;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  z-index: 1100;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 6px;
 }
 
 .fs__btn {
   position: relative;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--green-dark);
+  width: 35px;
+  height: 45px;
+  border-radius: 0 10px 10px 0;
+  color: #fff;
   font-size: 1.15rem;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  transition: transform 0.22s var(--ease), background 0.22s var(--ease),
-    color 0.22s var(--ease);
+  border: none;
+  border-right: 3px solid rgba(255, 255, 255, 0.55);
+  transition: width 0.22s var(--ease);
 }
 
 .fs__btn:hover,
-.fs__btn:focus-visible { transform: scale(1.09); color: #fff; }
+.fs__btn:focus-visible {
+  width: 50px;
+}
 
-.fs--wa:hover, .fs--wa:focus-visible { background: #25d366; }
-.fs--call:hover, .fs--call:focus-visible { background: var(--green); }
-.fs--ig:hover, .fs--ig:focus-visible { background: #c13584; }
-.fs--fb:hover, .fs--fb:focus-visible { background: #1877f2; }
-.fs--yt:hover, .fs--yt:focus-visible { background: #ff0000; }
+.fs--wa { background: #25d366; }
+.fs--call { background: #093c80; }
+.fs--ig {
+  background: radial-gradient(circle at 30% 107%,
+    #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.fs--fb { background: #1877f2; }
+.fs--yt { background: #ff0000; }
+.fs--lang { background: #6b4fbb; }
 
 .fs__tip {
   position: absolute;
-  right: calc(100% + 10px);
+  left: calc(100% + 10px);
   top: 50%;
-  transform: translateY(-50%) translateX(6px);
+  transform: translateY(-60%) translateX(-6px);
   white-space: nowrap;
   background: var(--green-dark);
   color: #fff;
@@ -59,17 +66,15 @@
 
 @media (max-width: 900px) {
   .fs {
-    top: auto;
     bottom: 16px;
-    right: 16px;
-    transform: none;
-    flex-direction: row-reverse;
+    left: 0;
   }
-  .fs__btn { width: 46px; height: 46px; }
+  .fs__btn { width: 38px; height: 48px; }
   .fs__tip { display: none; }
 }
 
 @media (max-width: 420px) {
-  .fs { gap: 0.45rem; bottom: 12px; right: 12px; }
-  .fs__btn { width: 42px; height: 42px; font-size: 1.05rem; }
+  .fs { gap: 5px; bottom: 12px; }
+  .fs__btn { width: 34px; height: 44px; font-size: 1rem; }
+  .fs__btn:hover, .fs__btn:focus-visible { width: 40px; }
 }
